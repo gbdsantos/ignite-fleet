@@ -26,7 +26,6 @@ div align="center">
 
 ## 💡 Sobre
 
-Aplicação full-stack que faz a transcrição de vídeos usando uma API de inteligência artificial generativa (*genIA*/GAI) feita durante o evento Next Level Week da Rocketseat nos dias 11, 12 e 13 de setembro de 2023.
 
 <br>
 
