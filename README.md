@@ -6,15 +6,15 @@
 
 <p align="center">
 <a href="https://github.com/gbdsantos/ignite-fleet/commits/master">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gbdsantos/ignite-fleet-ai.svg">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gbdsantos/ignite-fleet.svg">
 </a>
 
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/gbdsantos/ignite-fleet-ai.svg">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/gbdsantos/ignite-fleet.svg">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/gbdsantos/ignite-fleet-ai.svg">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/gbdsantos/ignite-fleet.svg">
 
   <a href="https://github.com/gbdsantos/ignite-fleet/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/gbdsantos/ignite-fleet-ai.svg">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/gbdsantos/ignite-fleet.svg">
   </a>
 </p>
 
