@@ -15,7 +15,7 @@ export function SignIn() {
         Gestão de uso de veículos
       </Slogan>
 
-      <Button title="Entrar com Google" isLoading />
+      <Button title="Entrar com Google" />
     </Container>
   );
 }

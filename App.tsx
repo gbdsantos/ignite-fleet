@@ -9,6 +9,8 @@ import { Loading } from './src/components/Loading';
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/theme';
 
+import { ANDROID_CLIENT_ID } from '@env';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular, Roboto_700Bold
