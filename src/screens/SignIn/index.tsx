@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Button } from '../../components/Button';
 
 import { Container, Slogan, Title } from './styles';
 
@@ -14,6 +14,8 @@ export function SignIn() {
       <Slogan>
         Gestão de uso de veículos
       </Slogan>
+
+      <Button title="Entrar com Google" isLoading />
     </Container>
   );
 }
