@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 
@@ -34,7 +35,14 @@ export function SignIn() {
   useEffect(() => {
     if (response?.type === 'success') {
       if (response.authentication?.idToken) {
-        console.log('AUTH TOKEN: ', response.authentication.idToken)
+
+        fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${response.authentication?.idToken}`)
+          .then(response => response.json())
+          .then(console.log)
+
+      } else {
+        Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
+        setIsAuthenticating(false);
       }
     }
   }, [response])
