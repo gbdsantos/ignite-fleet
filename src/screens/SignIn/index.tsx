@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 // import * as Google from 'expo-auth-session/providers/google';
+import { Realm, useApp } from '@realm/react';
 
 import {
   GoogleSignin,
@@ -27,6 +28,8 @@ GoogleSignin.configure({
 export function SignIn() {
   const [isAuthenticating, setIsAuthenticating] = useState(false)
   const [state, setState] = useState({});
+
+  const app = useApp();
 
   // ⚠️ DEPRECATED CODE
   // const [_, response, googleSignIn] = Google.useAuthRequest({
@@ -79,6 +82,14 @@ export function SignIn() {
   //   if (response?.type === 'success') {
   //     if (response.authentication?.idToken) {
   //       console.log('[USER TOKEN]: ', response.authentication.idToken)
+
+  //       const credentials = Realm.Credentials.jwt(response.authentication.idToken);
+
+  //       app.logIn(credentials).catch((error) => {
+  //         console.log(error)
+  //         Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
+  //         setIsAuthenticating(false);
+  //       } )
 
   //       fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${response.authentication?.idToken}`)
   //         .then(response => response.json())
