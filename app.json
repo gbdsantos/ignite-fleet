@@ -16,6 +16,7 @@
       "**/*"
     ],
     "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.gbdsantos.ignitefleet"
     },
@@ -24,8 +25,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#202024"
       },
+      "googleServicesFile": "./google-services.json",
       "package": "com.gbdsantos.ignitefleet"
     },
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     }
