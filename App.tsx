@@ -8,6 +8,8 @@ import { Loading } from './src/components/Loading';
 import { SignIn } from './src/screens/SignIn';
 import { Routes } from './src/routes';
 
+import { RealmProvider } from './src/libs/realm';
+
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/theme';
 
@@ -35,7 +37,9 @@ export default function App() {
           />
 
           <UserProvider fallback={SignIn}>
-            <Routes />
+            <RealmProvider>
+              <Routes />
+            </RealmProvider>
           </UserProvider>
         </SafeAreaProvider>
       </ThemeProvider>
