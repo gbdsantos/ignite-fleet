@@ -1,4 +1,5 @@
 import { TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useUser, useApp } from '@realm/react';
 
 import {
@@ -14,13 +15,16 @@ import theme from '../../theme';
 export function HomeHeader() {
   const user = useUser();
   const app = useApp();
+  const insets = useSafeAreaInsets();
+
+  const paddingTop = insets.top + 32;
 
   function handleLogout() {
     app.currentUser?.logOut();
   }
 
   return (
-    <Container>
+    <Container style={{ paddingTop }}>
       <Picture
         placeholder="L184i9offQof00ayfQay~qj[fQj["
         source={{ uri: user?.profile.pictureUrl }}
