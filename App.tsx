@@ -25,7 +25,6 @@ export default function App() {
   }
 
   return (
-
     <AppProvider id={REALM_APP_ID}>
       <ThemeProvider theme={theme}>
         <SafeAreaProvider>
