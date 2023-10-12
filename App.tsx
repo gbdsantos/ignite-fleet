@@ -3,14 +3,13 @@ import { StatusBar } from 'react-native';
 import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/roboto';
 import { AppProvider, UserProvider } from '@realm/react';
 
-import { Home } from './src/screens/Home';
-import { SignIn } from './src/screens/SignIn';
 import { Loading } from './src/components/Loading';
+import { SignIn } from './src/screens/SignIn';
+import { Routes } from './src/routes';
 
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/theme';
 
-import { ANDROID_CLIENT_ID } from '@env';
 import { REALM_APP_ID } from '@env';
 
 export default function App() {
@@ -30,10 +29,11 @@ export default function App() {
         <StatusBar
           backgroundColor="transparent"
           barStyle="light-content"
-          translucent />
+          translucent
+        />
 
         <UserProvider fallback={SignIn}>
-          <Home />
+          <Routes />
         </UserProvider>
       </ThemeProvider>
     </AppProvider>
