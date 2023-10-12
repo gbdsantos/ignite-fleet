@@ -1,4 +1,6 @@
 import { TouchableOpacity } from 'react-native';
+import { useUser } from '@realm/react';
+
 import {
   Container,
   Greeting,
@@ -6,16 +8,17 @@ import {
   Name,
   Picture
 } from './styles';
-
 import { Power } from 'phosphor-react-native';
 import theme from '../../theme';
 
 export function HomeHeader() {
+  const user = useUser();
+
   return (
     <Container>
       <Picture
         placeholder="L184i9offQof00ayfQay~qj[fQj["
-        source={{ uri: 'https://github.com/gbdsantos.png' }}
+        source={{ uri: user?.profile.pictureUrl }}
       />
       <Greeting>
         <Message>
@@ -23,7 +26,7 @@ export function HomeHeader() {
         </Message>
 
         <Name>
-          Guilherme
+          {user.profile.name}
         </Name>
       </Greeting>
 
