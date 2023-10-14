@@ -6,10 +6,9 @@ import { CarStatus } from '../../components/CarStatus';
 import { Container, Content } from './styles';
 
 export function Home() {
-
   const { navigate } = useNavigation();
 
-  function handleRegisterMoviment() {
+  function handleRegisterMovement() {
     navigate('departure');
   }
 
@@ -18,8 +17,8 @@ export function Home() {
       <HomeHeader />
 
       <Content>
-        <CarStatus licensePlate="XXX-1234" />
-        <CarStatus licensePlate="XXX-1234" onPress={handleRegisterMoviment} />
+        <CarStatus />
+        <CarStatus licensePlate="XXX-1234" onPress={handleRegisterMovement} />
       </Content>
     </Container>
   );

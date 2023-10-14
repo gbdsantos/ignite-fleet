@@ -5,6 +5,7 @@ import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/
 import { AppProvider, UserProvider } from '@realm/react';
 
 import { Loading } from './src/components/Loading';
+import { Home } from './src/screens/Home';
 import { SignIn } from './src/screens/SignIn';
 import { Routes } from './src/routes';
 
@@ -29,14 +30,14 @@ export default function App() {
   return (
     <AppProvider id={REALM_APP_ID}>
       <ThemeProvider theme={theme}>
-        <SafeAreaProvider>
+        <SafeAreaProvider style={{ flex: 1, backgroundColor: theme.COLORS.GRAY_800 }}>
           <StatusBar
             backgroundColor="transparent"
             barStyle="light-content"
             translucent
           />
 
-          <UserProvider fallback={SignIn}>
+          <UserProvider fallback={Home}>
             <RealmProvider>
               <Routes />
             </RealmProvider>
