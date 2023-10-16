@@ -8,7 +8,7 @@ type Props = TextInputProps & {
 }
 
 export function LicensePlateInput({ label, ...rest }: Props) {
-  const COLORS = useTheme();
+  const { COLORS } = useTheme();
 
   return (
     <Container>
