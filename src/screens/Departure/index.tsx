@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -12,14 +13,23 @@ import { LicensePlateInput } from '../../components/LicensePlateInput';
 import { TextAreaInput } from '../../components/TextAreaInput';
 
 import { Container, Content } from './styles';
+import { licensePlateValidate } from '../../utils/licensePlateValidate';
 
 const keyboardAvoidingViewBehavior = Platform.OS === 'android' ? 'height' : 'position';
 
 export function Departure() {
+  const [description, setDescription] = useState('');
+  const [licensePlate, setLicensePlate] = useState('');
+
   const descriptionRef = useRef<TextInput>(null);
+  const licensePlateRef = useRef<TextInput>(null);
 
   function handleDepartureRegister() {
-    console.log("Ok!");
+    if (!licensePlateValidate(licensePlate)) {
+      licensePlateRef.current?.focus();
+
+      return Alert.alert('Placa inválida', 'A placa é inválida. Por favor, informe a placa correta do veículo.');
+    }
   }
 
   return (
@@ -34,14 +44,17 @@ export function Departure() {
           <Content>
             <LicensePlateInput
               label="Placa do veículo"
+              onChangeText={setLicensePlate}
               onSubmitEditing={() => descriptionRef.current?.focus()}
               placeholder="BRA1234"
+              ref={licensePlateRef}
               returnKeyType="next"
             />
 
             <TextAreaInput
               blurOnSubmit
               label="Finalidade"
+              onChangeText={setDescription}
               onSubmitEditing={handleDepartureRegister}
               placeholder="Vou utilizar o veículo para..."
               ref={descriptionRef}
