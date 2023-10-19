@@ -1,4 +1,5 @@
-import React from 'react';
+import 'react-native-get-random-values';
+
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/roboto';
@@ -36,12 +37,11 @@ export default function App() {
             barStyle="light-content"
             translucent
           />
-
-          <UserProvider fallback={Home}>
-            <RealmProvider>
-              <Routes />
-            </RealmProvider>
-          </UserProvider>
+          {/* <UserProvider fallback={Home}> */}
+          {/* <RealmProvider> */}
+          <Routes />
+          {/* </RealmProvider> */}
+          {/* </UserProvider> */}
         </SafeAreaProvider>
       </ThemeProvider>
     </AppProvider>
