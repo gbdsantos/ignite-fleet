@@ -17,18 +17,22 @@ export function Home() {
   // const historic = useQuery(Historic);
 
   function handleRegisterMovement() {
-    navigate('departure');
-  }
-
-  function fetchVehicle() {
-    try {
-      const vehicle = historic.filtered('status = "departure"')[0];
-      setVehicleInUse(vehicle);
-    } catch (error) {
-      Alert.alert('Veículo em uso', 'Não foi possível carregar o veículo em uso.');
-      console.log(error);
+    if (vehicleInUse?._id) {
+      return navigate('arrival', { id: vehicleInUse?._id.toString() });
+    } else {
+      navigate('departure');
     }
   }
+
+  // function fetchVehicle() {
+  //   try {
+  //     const vehicle = historic.filtered('status = "departure"')[0];
+  //     setVehicleInUse(vehicle);
+  //   } catch (error) {
+  //     Alert.alert('Veículo em uso', 'Não foi possível carregar o veículo em uso.');
+  //     console.log(error);
+  //   }
+  // }
 
   // useEffect(() => {
   //   fetchVehicle();
