@@ -43,7 +43,10 @@ export function Home() {
       <HomeHeader />
 
       <Content>
-        <CarStatus />
+        <CarStatus
+          licensePlate="BRA1234"
+          onPress={() => navigate('arrival', { id: 'someUUIDhere' })}
+        />
         <CarStatus
           licensePlate={vehicleInUse?.license_plate}
           onPress={handleRegisterMovement}
