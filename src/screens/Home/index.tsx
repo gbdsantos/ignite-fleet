@@ -35,6 +35,10 @@ export function Home() {
   //   }
   // }
 
+  // function fetchHistoric() {
+  //   historic.filtered("status = 'arrival' SORT(created_at DESC)");
+  // }
+
   // useEffect(() => {
   //   fetchVehicleInUse();
   // }, []);
