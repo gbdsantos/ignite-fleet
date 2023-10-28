@@ -57,7 +57,10 @@ export function Home() {
       console.log(error);
       Alert.alert('Histórico', 'Não foi possível carregar o histórico.');
     }
+  }
 
+  function handleHistoricDetails(id: string) {
+    navigate('arrival', { id });
   }
 
   // useEffect(() => {
@@ -88,7 +91,7 @@ export function Home() {
           Histórico
         </Title>
 
-        {/* <FlatList
+        <FlatList
           contentContainerStyle={{ paddingBottom: 100 }}
           data={vehicleHistoric}
           keyExtractor={item => item.id}
@@ -98,11 +101,13 @@ export function Home() {
             </Label>
           )}
           renderItem={({ item }) => (
-            <HistoricCard data={item}
+            <HistoricCard
+              data={item}
+              onPress={() => handleHistoricDetails(item.id)}
             />
           )}
           showsVerticalScrollIndicator={false}
-        /> */}
+        />
 
         <HistoricCard data={{
           created: '20/04',
