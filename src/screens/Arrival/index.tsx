@@ -75,7 +75,7 @@ export function Arrival() {
 
   return (
     <Container>
-      <Header title={title ? title : 'Chegada'} />
+      <Header title={/* title ? title : */ 'Chegada'} />
       <Content>
         <Label>
           Placa do veículo
@@ -96,7 +96,7 @@ export function Arrival() {
         </Description>
 
         {
-          historic?.status === 'departure' &&
+          // historic?.status === 'departure' &&
           <Footer>
             <ButtonIcon
               icon={X}

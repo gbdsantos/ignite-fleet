@@ -39,7 +39,7 @@ export function Home() {
   //   }
   // }
 
-  function fetchHistoric() {
+  /* function fetchHistoric() {
     try {
       const response = historic.filtered("status = 'arrival' SORT(created_at DESC)");
 
@@ -57,7 +57,7 @@ export function Home() {
       console.log(error);
       Alert.alert('Histórico', 'Não foi possível carregar o histórico.');
     }
-  }
+  } */
 
   function handleHistoricDetails(id: string) {
     navigate('arrival', { id });
@@ -91,7 +91,7 @@ export function Home() {
           Histórico
         </Title>
 
-        <FlatList
+        {/*         <FlatList
           contentContainerStyle={{ paddingBottom: 100 }}
           data={vehicleHistoric}
           keyExtractor={item => item.id}
@@ -107,7 +107,7 @@ export function Home() {
             />
           )}
           showsVerticalScrollIndicator={false}
-        />
+        /> */}
 
         <HistoricCard data={{
           created: '20/04',
