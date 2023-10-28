@@ -35,5 +35,6 @@ export const Footer = styled.View`
   flex-direction: row;
   gap: 16px;
   margin-top: 32px;
+  padding: 32px;
   width: 100%;
 `;

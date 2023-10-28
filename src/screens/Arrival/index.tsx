@@ -94,21 +94,21 @@ export function Arrival() {
           {/* { historic?.description } */}
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a efficitur odio, et blandit turpis. In eget condimentum nisl, at ultrices ipsum. Etiam in aliquam ante. Phasellus nec rutrum magna. Pellentesque commodo gravida vehicula. Curabitur interdum hendrerit interdum. Pellentesque sagittis ultricies arcu at porttitor. Nam a tincidunt lectus. Fusce sollicitudin eget tortor et finibus.
         </Description>
-
-        {
-          // historic?.status === 'departure' &&
-          <Footer>
-            <ButtonIcon
-              icon={X}
-              onPress={handleRemoveVehicleUsage}
-            />
-            <Button
-              onPress={handleArrivalRegister}
-              title="Registrar Chegada"
-            />
-          </Footer>
-        }
       </Content>
+
+      {
+        // historic?.status === 'departure' &&
+        <Footer>
+          <ButtonIcon
+            icon={X}
+            onPress={handleRemoveVehicleUsage}
+          />
+          <Button
+            onPress={handleArrivalRegister}
+            title="Registrar Chegada"
+          />
+        </Footer>
+      }
     </Container>
   );
 }
