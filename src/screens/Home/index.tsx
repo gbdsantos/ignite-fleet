@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 import { Historic } from '../../libs/realm/schemas/Historic';
 import { useQuery, useRealm } from '../../libs/realm';
+import { useUser } from '@realm/react';
 
 import { HomeHeader } from '../../components/HomeHeader';
 import { CarStatus } from '../../components/CarStatus';
@@ -19,6 +20,7 @@ export function Home() {
   const { navigate } = useNavigation();
 
   // const historic = useQuery(Historic);
+  const user = useUser();
   // const realm = useRealm();
 
   function handleRegisterMovement() {
@@ -76,6 +78,15 @@ export function Home() {
   //     }
   //   }
   // }, []);
+
+  // useEffect(() => {
+  //   realm.subscriptions.update((mutableSubs, realm) => {
+  //     const historicByUserQuery = realm.objects('Historic').filtered(`user_id = '${user!.id}'`);
+
+  //     mutableSubs.add(historicByUserQuery, { name: 'historic_by_user' });
+
+  //   });
+  // }, [realm]);
 
   return (
     <Container>

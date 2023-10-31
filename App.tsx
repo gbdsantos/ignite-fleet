@@ -11,7 +11,7 @@ import { Home } from './src/screens/Home';
 import { SignIn } from './src/screens/SignIn';
 import { Routes } from './src/routes';
 
-import { RealmProvider } from './src/libs/realm';
+import { RealmProvider, syncConfig } from './src/libs/realm';
 
 import { ThemeProvider } from 'styled-components/native';
 import theme from './src/theme';
@@ -39,7 +39,7 @@ export default function App() {
             translucent
           />
           {/* <UserProvider fallback={Home}> */}
-          {/* <RealmProvider> */}
+          {/* <RealmProvider fallback={Loading} sync={syncConfig}> */}
           <Routes />
           {/* </RealmProvider> */}
           {/* </UserProvider> */}
