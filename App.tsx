@@ -5,11 +5,13 @@ import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/roboto';
 import { AppProvider, UserProvider } from '@realm/react';
+import { WifiSlash } from 'phosphor-react-native';
 
-import { Loading } from './src/components/Loading';
 import { Home } from './src/screens/Home';
-import { SignIn } from './src/screens/SignIn';
+import { Loading } from './src/components/Loading';
 import { Routes } from './src/routes';
+import { SignIn } from './src/screens/SignIn';
+import { TopMessage } from './src/components/TopMessage';
 
 import { RealmProvider, syncConfig } from './src/libs/realm';
 
@@ -37,6 +39,10 @@ export default function App() {
             backgroundColor="transparent"
             barStyle="light-content"
             translucent
+          />
+          <TopMessage
+            icon={WifiSlash}
+            title="Você está off-line."
           />
           {/* <UserProvider fallback={Home}> */}
           {/* <RealmProvider fallback={Loading} sync={syncConfig}> */}

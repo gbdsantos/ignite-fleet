@@ -20,7 +20,7 @@ export function Home() {
   const { navigate } = useNavigation();
 
   // const historic = useQuery(Historic);
-  const user = useUser();
+  // const user = useUser();
   // const realm = useRealm();
 
   function handleRegisterMovement() {
