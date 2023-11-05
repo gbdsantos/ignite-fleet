@@ -33,7 +33,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "realm": "^12.2.0",
-    "styled-components": "^6.0.8"
+    "styled-components": "^6.0.8",
+    "@react-native-community/netinfo": "9.3.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
