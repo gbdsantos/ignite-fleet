@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { Historic } from '../../libs/realm/schemas/Historic';
 import { useQuery, useRealm } from '../../libs/realm';
 import { useUser } from '@realm/react';
+import { getLastAsyncTimestamp, saveLastSyncTimestamp } from '../../libs/asyncStorage/syncStorage';
 
 import { HomeHeader } from '../../components/HomeHeader';
 import { CarStatus } from '../../components/CarStatus';
@@ -41,34 +42,39 @@ export function Home() {
   //   }
   // }
 
-  /* function fetchHistoric() {
-    try {
-      const response = historic.filtered("status = 'arrival' SORT(created_at DESC)");
+  // async function fetchHistoric() {
+  //   try {
+  //     const response = historic.filtered("status = 'arrival' SORT(created_at DESC)");
 
-      const formattedHistoric = response.map((item) => {
-        return ({
-          id: item._id!.toString(),
-          licensePlate: item.license_plate,
-          isSync: false,
-          created: dayjs(item.created_at).format('[Saída em] DD/MM/YYYY [às] HH:mm')
-        });
-      });
+  //     const lastSync = await getLastAsyncTimestamp();
 
-      setVehicleHistoric(formattedHistoric);
-    } catch (error) {
-      console.log(error);
-      Alert.alert('Histórico', 'Não foi possível carregar o histórico.');
-    }
-  } */
+  //     const formattedHistoric = response.map((item) => {
+  //       return ({
+  //         id: item._id!.toString(),
+  //         licensePlate: item.license_plate,
+  //         isSync: lastSync > item.updated_at!.getTime(),
+  //         created: dayjs(item.created_at).format('[Saída em] DD/MM/YYYY [às] HH:mm')
+  //       });
+  //     });
+
+  //     setVehicleHistoric(formattedHistoric);
+  //   } catch (error) {
+  //     console.log(error);
+  //     Alert.alert('Histórico', 'Não foi possível carregar o histórico.');
+  //   }
+  // }
 
   function handleHistoricDetails(id: string) {
     navigate('arrival', { id });
   }
 
-  function progressNotification(transferred: number, transferable: number) {
+  async function progressNotification(transferred: number, transferable: number) {
     const percentage = (transferred / transferable) * 100;
 
-    console.log("transferred: ", `${percentage}%`);
+    if (percentage === 100) {
+      await saveLastSyncTimestamp();
+      fetchHistoric();
+    }
   }
 
   // useEffect(() => {
@@ -94,21 +100,21 @@ export function Home() {
   //   });
   // }, [realm]);
 
-  useEffect(() => {
-    const syncSession = realm.syncSession;
+  // useEffect(() => {
+  //   const syncSession = realm.syncSession;
 
-    if (!syncSession) {
-      return;
-    }
+  //   if (!syncSession) {
+  //     return;
+  //   }
 
-    syncSession.addProgressNotification(
-      Realm.ProgressDirection.Upload,
-      Realm.ProgressMode.ReportIndefinitely,
-      progressNotification
-    );
+  //   syncSession.addProgressNotification(
+  //     Realm.ProgressDirection.Upload,
+  //     Realm.ProgressMode.ReportIndefinitely,
+  //     progressNotification
+  //   );
 
-    return () => syncSession.removeProgressNotification(progressNotification);
-  }, []);
+  //   return () => syncSession.removeProgressNotification(progressNotification);
+  // }, []);
 
   return (
     <Container>
