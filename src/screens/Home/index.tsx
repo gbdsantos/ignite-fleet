@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import dayjs from 'dayjs';
 
 import { Historic } from '../../libs/realm/schemas/Historic';
@@ -74,6 +75,11 @@ export function Home() {
     if (percentage === 100) {
       await saveLastSyncTimestamp();
       fetchHistoric();
+
+      Toast.show({
+        text1: 'Todos os dados estão sincronizados.',
+        type: 'info'
+      });
     }
   }
 
