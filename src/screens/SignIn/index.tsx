@@ -16,13 +16,14 @@ import { Container, Slogan, Title } from './styles';
 
 import backgroundImg from '../../assets/background.png';
 
-import { ANDROID_CLIENT_ID, IOS_CLIENT_ID } from '@env';
+import { ANDROID_CLIENT_ID, IOS_CLIENT_ID, WEB_CLIENT_ID } from '@env';
 
 WebBrowser.maybeCompleteAuthSession();
 
 GoogleSignin.configure({
   // iosClientId: IOS_CLIENT_ID,
-  scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
+  scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'],
+  webClientId: WEB_CLIENT_ID
 })
 
 export function SignIn() {
@@ -30,13 +31,6 @@ export function SignIn() {
   const [state, setState] = useState({});
 
   const app = useApp();
-
-  // ⚠️ DEPRECATED CODE
-  // const [_, response, googleSignIn] = Google.useAuthRequest({
-  //   androidClientId: ANDROID_CLIENT_ID,
-  //   iosClientId: IOS_CLIENT_ID,
-  //   scopes: ['profile', 'email']
-  // })
 
   async function handleGoogleSignIn() {
     setIsAuthenticating(true)
@@ -69,13 +63,6 @@ export function SignIn() {
     } finally {
       setIsAuthenticating(false);
     }
-
-    // ⚠️ DEPRECATED CODE
-    // googleSignIn().then((response) => {
-    //   if (response.type !== 'success') {
-    //     setIsAuthenticating(false);
-    //   }
-    // })
   }
 
   // useEffect(() => {
@@ -89,7 +76,7 @@ export function SignIn() {
   //         console.log(error)
   //         Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
   //         setIsAuthenticating(false);
-  //       } )
+  //       })
 
   //       fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${response.authentication?.idToken}`)
   //         .then(response => response.json())
