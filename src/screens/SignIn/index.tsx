@@ -41,9 +41,30 @@ export function SignIn() {
       const userInfo = await GoogleSignin.signIn();
       const token = await GoogleSignin.getTokens();
 
-      console.log(userInfo)
-      console.log(token)
+      console.log('[USER INFO]: ', userInfo);
+      console.log('[USER TOKEN]: ', token);
+
       setState({ userInfo });
+
+      if (token?.idToken) {
+        console.log('[USER TOKEN]: ', token?.idToken);
+
+        const credentials = Realm.Credentials.jwt(token.idToken);
+
+        app.logIn(credentials).catch((error) => {
+          console.log(error)
+          Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
+          setIsAuthenticating(false);
+        })
+
+        fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token?.idToken}`)
+          .then(response => response.json())
+          .then(console.log)
+      }
+      else {
+        Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
+        setIsAuthenticating(false);
+      }
 
     } catch (error: any) {
       console.log(error.code);
@@ -65,29 +86,9 @@ export function SignIn() {
     }
   }
 
-  // useEffect(() => {
-  //   if (response?.type === 'success') {
-  //     if (response.authentication?.idToken) {
-  //       console.log('[USER TOKEN]: ', response.authentication.idToken)
+  useEffect(() => {
 
-  //       const credentials = Realm.Credentials.jwt(response.authentication.idToken);
-
-  //       app.logIn(credentials).catch((error) => {
-  //         console.log(error)
-  //         Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
-  //         setIsAuthenticating(false);
-  //       })
-
-  //       fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${response.authentication?.idToken}`)
-  //         .then(response => response.json())
-  //         .then(console.log)
-
-  //     } else {
-  //       Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
-  //       setIsAuthenticating(false);
-  //     }
-  //   }
-  // }, [response])
+  }, [])
 
   return (
     <Container source={backgroundImg}>
