@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
-// import * as Google from 'expo-auth-session/providers/google';
-import { Realm, useApp } from '@realm/react';
+import Realm from 'realm';
 
 import {
   GoogleSignin,
@@ -16,13 +15,20 @@ import { Container, Slogan, Title } from './styles';
 
 import backgroundImg from '../../assets/background.png';
 
-import { ANDROID_CLIENT_ID, IOS_CLIENT_ID, WEB_CLIENT_ID } from '@env';
+import {
+  ANDROID_CLIENT_ID,
+  IOS_CLIENT_ID,
+  REALM_APP_ID,
+  WEB_CLIENT_ID
+} from '@env';
+
 
 WebBrowser.maybeCompleteAuthSession();
 
 GoogleSignin.configure({
   // iosClientId: IOS_CLIENT_ID,
-  scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'],
+  // scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'],
+  scopes: ['email', 'profile'],
   webClientId: WEB_CLIENT_ID
 })
 
@@ -30,34 +36,38 @@ export function SignIn() {
   const [isAuthenticating, setIsAuthenticating] = useState(false)
   const [state, setState] = useState({});
 
-  const app = useApp();
+  const app = new Realm.App({
+    id: REALM_APP_ID,
+  });
 
   async function handleGoogleSignIn() {
-    setIsAuthenticating(true)
+    setIsAuthenticating(true);
 
     try {
       await GoogleSignin.hasPlayServices();
 
       const userInfo = await GoogleSignin.signIn();
-      const token = await GoogleSignin.getTokens();
+      const { idToken } = await GoogleSignin.signIn();
+      const tokens = await GoogleSignin.getTokens();
 
-      console.log('[USER INFO]: ', userInfo);
-      console.log('[USER TOKEN]: ', token);
+      // console.log('[USER INFO]: ', userInfo);
+      // console.log('\n');
+      // console.log('[USER TOKEN]: ', tokens);
 
       setState({ userInfo });
 
-      if (token?.idToken) {
-        console.log('[USER TOKEN]: ', token?.idToken);
+      if (tokens?.idToken) {
+        // console.log('[USER TOKEN]: ', idToken);
 
-        const credentials = Realm.Credentials.jwt(token.idToken);
+        const credentials = Realm.Credentials.jwt(idToken);
 
-        app.logIn(credentials).catch((error) => {
-          console.log(error)
+        const user = await app.logIn(credentials).catch((error) => {
+          console.log('[REALMDB ERROR]: ', error)
           Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
           setIsAuthenticating(false);
         })
 
-        fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token?.idToken}`)
+        fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${tokens?.idToken}`)
           .then(response => response.json())
           .then(console.log)
       }
