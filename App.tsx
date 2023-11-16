@@ -51,11 +51,11 @@ export default function App() {
             />
           }
 
-          {/* <UserProvider fallback={Home}> */}
-          {/* <RealmProvider fallback={Loading} sync={syncConfig}> */}
-          <Routes />
-          {/* </RealmProvider> */}
-          {/* </UserProvider> */}
+          <UserProvider fallback={SignIn}>
+            <RealmProvider fallback={Loading} sync={syncConfig}>
+              <Routes />
+            </RealmProvider>
+          </UserProvider>
         </SafeAreaProvider>
       </ThemeProvider>
     </AppProvider>

@@ -22,7 +22,6 @@ import {
   WEB_CLIENT_ID
 } from '@env';
 
-
 WebBrowser.maybeCompleteAuthSession();
 
 GoogleSignin.configure({
@@ -66,10 +65,6 @@ export function SignIn() {
           Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
           setIsAuthenticating(false);
         })
-
-        fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${tokens?.idToken}`)
-          .then(response => response.json())
-          .then(console.log)
       }
       else {
         Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta Google')
