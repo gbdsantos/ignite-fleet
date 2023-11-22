@@ -19,6 +19,8 @@ import { Container, Content, Message } from './styles';
 import { Historic } from '../../libs/realm/schemas/Historic';
 import { useRealm } from '../../libs/realm';
 import { useUser } from '@realm/react';
+
+import { getAddressLocation } from '../../utils/getAddressLocation';
 import { licensePlateValidate } from '../../utils/licensePlateValidate';
 
 export function Departure() {
@@ -84,7 +86,10 @@ export function Departure() {
       accuracy: LocationAccuracy.High,
       timeInterval: 1000
     }, (location) => {
-      console.log(location);
+      getAddressLocation(location.coords)
+        .then((address) => {
+          console.log(address);
+        });
     }).then((response) => subscription = response);
 
     return () => subscription.remove();
