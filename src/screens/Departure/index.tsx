@@ -17,6 +17,7 @@ import { LocationInfo } from '../../components/LocationInfo';
 import { TextAreaInput } from '../../components/TextAreaInput';
 
 import { Container, Content, Message } from './styles';
+import { Car } from 'phosphor-react-native';
 
 import { Historic } from '../../libs/realm/schemas/Historic';
 import { useRealm } from '../../libs/realm';
@@ -132,6 +133,7 @@ export function Departure() {
             {
               currentAddress &&
               <LocationInfo
+                icon={Car}
                 label='Localização atual'
                 description={currentAddress}
               />
