@@ -16,7 +16,7 @@ type Props = LocationInfoProps & {
 export function LocationInfo({ icon, label, description }: Props) {
   return (
     <Container>
-      <IconBox icon={icon} size='NORMAL' />
+      <IconBox icon={icon} />
 
       <Info>
         <Label numberOfLines={1}>

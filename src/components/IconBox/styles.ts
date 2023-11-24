@@ -20,7 +20,6 @@ const variantSizeStyles = (size: SizeProps) => {
 }
 
 export const Container = styled.View<Props>`
-  flex: 1;
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) =>  theme.COLORS.GRAY_700};
