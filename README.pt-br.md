@@ -32,12 +32,24 @@
 ## ⚙️ Executar Projeto
 
 ```Bash
-# Install dependencies
+# Instalar dependências
 npm install
 
-# Run 
+# Buildar projeto
+npx expo prebuild
+
+# Executar
 npx expo start
+
+# Android
+npx expo run:android
 ```
+
+Atenção com os valores das chaves de API adicionados nos arquivos abaixo com o comando expo prebuild:
+
+- AndroidManifest.xml (pasta android folder)
+- AppDelegate.mm (pasta ios)
+- Info.plist (pasta ios)
 
 <br>
 

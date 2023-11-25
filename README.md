@@ -39,15 +39,27 @@
 # Install dependencies
 npm install
 
-# Run 
+# Build project
+npx expo prebuild
+
+# Run
 npx expo start
+
+# Android
+npx expo run:android
 ```
-  
+
+Attention with API Keys values added in below files with expo prebuild command:
+
+- AndroidManifest.xml (android folder)
+- AppDelegate.mm (ios folder)
+- Info.plist (ios folder)
+
 <br>
 
 ## ⚖️ License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/gbdsantos/ignite-fleet/blob/master/LICENSE) for more information. 
+This project is under the MIT license. See the [LICENSE](https://github.com/gbdsantos/ignite-fleet/blob/master/LICENSE) for more information.
 
 ---
 Made with ❤️ by 🧑‍🚀 Guilherme Bezerra 👋 [Get in touch!](https://www.linkedin.com/in/gbdsantos/)
