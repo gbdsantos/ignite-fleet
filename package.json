@@ -37,7 +37,8 @@
     "react-native-svg": "13.9.0",
     "react-native-toast-message": "^2.1.7",
     "realm": "^12.2.0",
-    "styled-components": "^6.0.8"
+    "styled-components": "^6.0.8",
+    "react-native-maps": "1.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
