@@ -3,6 +3,7 @@ import { Alert, ScrollView, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useNavigation } from '@react-navigation/native';
 import {
+  requestBackgroundPermissionsAsync,
   useForegroundPermissions,
   watchPositionAsync,
   LocationAccuracy,
@@ -45,7 +46,7 @@ export function Departure() {
   const descriptionRef = useRef<TextInput>(null);
   const licensePlateRef = useRef<TextInput>(null);
 
-  function handleDepartureRegister() {
+  async function handleDepartureRegister() {
     try {
       if (!licensePlateValidate(licensePlate)) {
         licensePlateRef.current?.focus();
@@ -64,6 +65,13 @@ export function Departure() {
       }
 
       setIsRegistering(true);
+
+      const backgroundPermission = await requestBackgroundPermissionsAsync();
+
+      if (!backgroundPermission.granted) {
+        setIsRegistering(false);
+        return Alert.alert('Localização', 'É necessário permitir que o App tenha acesso a localização em segundo plano. Acesse as configurações do dispositivo e habilite "Permitir o tempo todo".');
+      }
 
       // realm.write(() => {
       //   Realm.create('Historic', Historic.generate({
