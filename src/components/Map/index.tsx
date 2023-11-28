@@ -3,17 +3,20 @@ import MapView, {
   LatLng,
   Marker,
   MapViewProps,
+  Polyline,
   PROVIDER_GOOGLE
 } from 'react-native-maps';
 
 import { IconBox } from '../IconBox';
 import { Car, FlagCheckered } from 'phosphor-react-native';
+import { useTheme } from 'styled-components/native';
 
 type Props = MapViewProps & {
   coordinates: LatLng[];
 }
 
 export function Map({ coordinates, ...rest }: Props) {
+  const { COLORS } = useTheme();
   const mapRef = useRef<MapView>(null);
   const lastCoordinate = coordinates[coordinates.length - 1];
 
@@ -44,9 +47,17 @@ export function Map({ coordinates, ...rest }: Props) {
 
       {
         coordinates.length > 1 &&
-        <Marker coordinate={lastCoordinate} identifier="arrival">
-          <IconBox icon={FlagCheckered} size="SMALL" />
-        </Marker>
+        <>
+          <Marker coordinate={lastCoordinate} identifier="arrival">
+            <IconBox icon={FlagCheckered} size="SMALL" />
+          </Marker>
+
+          <Polyline
+            coordinates={[...coordinates]}
+            strokeColor={COLORS.GRAY_700}
+            strokeWidth={7}
+          />
+        </>
       }
     </MapView>
   );
