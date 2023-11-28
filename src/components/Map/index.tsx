@@ -1,4 +1,4 @@
-import MapView, { LatLng, MapViewProps, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { LatLng, Marker, MapViewProps, PROVIDER_GOOGLE } from 'react-native-maps';
 
 type Props = MapViewProps & {
   coordinates: LatLng[];
@@ -17,6 +17,10 @@ export function Map({ coordinates, ...rest }: Props) {
         longitudeDelta: 0.005
       }}
       style={{ height: 200, width: '100%' }}
-    />
+    >
+      <Marker
+        coordinate={coordinates[0]}
+      />
+    </MapView>
   );
 }
