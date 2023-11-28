@@ -28,6 +28,7 @@ import { useUser } from '@realm/react';
 
 import { getAddressLocation } from '../../utils/getAddressLocation';
 import { licensePlateValidate } from '../../utils/licensePlateValidate';
+import { startLocationTask } from '../../tasks/backgroundLocationTask';
 
 export function Departure() {
   const [description, setDescription] = useState('');
@@ -72,6 +73,8 @@ export function Departure() {
         setIsRegistering(false);
         return Alert.alert('Localização', 'É necessário permitir que o App tenha acesso a localização em segundo plano. Acesse as configurações do dispositivo e habilite "Permitir o tempo todo".');
       }
+
+      await startLocationTask();
 
       // realm.write(() => {
       //   Realm.create('Historic', Historic.generate({
