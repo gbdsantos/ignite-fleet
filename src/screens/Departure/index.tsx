@@ -59,6 +59,10 @@ export function Departure() {
         return Alert.alert('Finalidade', 'Por favor, informe a finalidade da utilização do veículo.');
       }
 
+      if (!currentCoords?.latitude && !currentCoords?.longitude) {
+        return Alert.alert('Localização!', 'Não foi possível obter a localização atual. Tente novamente!');
+      }
+
       setIsRegistering(true);
 
       // realm.write(() => {
