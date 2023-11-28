@@ -21,3 +21,7 @@ export async function saveStorageLocation(newLocation: LocationProps) {
 
   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(storage));
 }
+
+export async function removeStorageLocations() {
+  await AsyncStorage.removeItem(STORAGE_KEY);
+}
