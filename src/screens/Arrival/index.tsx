@@ -22,6 +22,7 @@ import {
   LicensePlate
 } from './styles';
 
+import { stopLocationTask } from '../../tasks/backgroundLocationTask';
 
 type RouteParamsProps = {
   id: string;
@@ -58,21 +59,24 @@ export function Arrival() {
     goBack();
   }
 
-  function handleArrivalRegister() {
+  async function handleArrivalRegister() {
     // try {
-    //   if(!historic) {
+    //   if (!historic) {
     //     return Alert.alert('Error', 'Não foi possível obter os dados para registrar a chegada do veículo.');
     //   }
+
+    //   await stopLocationTask();
+
     //   realm.write(() => {
-    //       historic.status = 'arrival',
+    //     historic.status = 'arrival',
     //       historic.updated_at = new Date();
-    //     }
+    //   }
     //   );
 
     //   Alert.alert('Chegada', 'Chegada registrada com sucesso!');
     //   goBack();
 
-    // } catch(error) {
+    // } catch (error) {
     //   console.log(error);
     //   Alert.alert('Error', 'Não foi possível registrar a chegada do veículo.');
     // }
