@@ -1,7 +1,7 @@
 import MapView, { LatLng, Marker, MapViewProps, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import { IconBox } from '../IconBox';
-import { Car } from 'phosphor-react-native';
+import { Car, FlagCheckered } from 'phosphor-react-native';
 
 type Props = MapViewProps & {
   coordinates: LatLng[];
@@ -24,6 +24,13 @@ export function Map({ coordinates, ...rest }: Props) {
       <Marker coordinate={coordinates[0]}>
         <IconBox icon={Car} size="SMALL" />
       </Marker>
+
+      {
+        coordinates.length > 1 &&
+        <Marker coordinate={lastCoordinate}>
+          <IconBox icon={FlagCheckered} size="SMALL" />
+        </Marker>
+      }
     </MapView>
   );
 }
