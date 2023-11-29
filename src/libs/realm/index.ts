@@ -1,3 +1,4 @@
+import Realm from "realm";
 import { createRealmContext } from '@realm/react';
 
 import { Coords } from './schemas/Coords';
