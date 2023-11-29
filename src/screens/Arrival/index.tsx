@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { BSON } from 'realm';
+import { LatLng } from 'react-native-maps';
 
 import { useObject, useRealm } from '../../libs/realm';
 import { Historic } from '../../libs/realm/schemas/Historic';
+
 import { getLastAsyncTimestamp } from '../../libs/asyncStorage/syncStorage';
+import { getStorageLocation } from '../../libs/asyncStorage/locationStorage';
+import { stopLocationTask } from '../../tasks/backgroundLocationTask';
 
 import { Button } from '../../components/Button';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { Header } from '../../components/Header';
-
-import { X } from 'phosphor-react-native';
+import { Map } from '../../components/Map';
 
 import {
   AsyncMessage,
@@ -21,9 +24,7 @@ import {
   Footer, Label,
   LicensePlate
 } from './styles';
-
-import { getStorageLocation } from '../../libs/asyncStorage/locationStorage';
-import { stopLocationTask } from '../../tasks/backgroundLocationTask';
+import { X } from 'phosphor-react-native';
 
 type RouteParamsProps = {
   id: string;
@@ -31,6 +32,7 @@ type RouteParamsProps = {
 
 export function Arrival() {
   const [dataNotSynced, setDataNotSynced] = useState(false);
+  const [coordinates, setCoordinates] = useState<LatLng[]>([]);
 
   const route = useRoute();
   const { goBack } = useNavigation();
@@ -89,8 +91,7 @@ export function Arrival() {
     setDataNotSynced(updatedAt > lastSync);
 
     const locationsStorage = await getStorageLocation();
-
-    console.log("[STORAGE]: ", locationsStorage);
+    setCoordinates(locationsStorage);
   }
 
   useEffect(() => {
@@ -100,6 +101,9 @@ export function Arrival() {
   return (
     <Container>
       <Header title={title ? title : 'Chegada'} />
+
+      {coordinates.length > 0 && <Map coordinates={coordinates} />}
+
       <Content>
         <Label>
           Placa do veículo
