@@ -139,7 +139,7 @@ export function Home() {
       <Content>
         <CarStatus
           licensePlate="BRA1234"
-          onPress={() => navigate('arrival', { id: 'someUUIDhere' })}
+          onPress={() => navigate('arrival', { id: 'ded0418f-33c3-4888-a7f3-2ba4efb18700' })}
         />
         <CarStatus
           licensePlate={vehicleInUse?.license_plate}
@@ -169,6 +169,7 @@ export function Home() {
         /> */}
 
         <HistoricCard data={{
+          id: 'someIdHere',
           created: '20/04',
           licensePlate: 'XXX1212',
           isSync: false

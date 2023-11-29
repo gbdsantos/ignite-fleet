@@ -22,6 +22,7 @@ import {
   LicensePlate
 } from './styles';
 
+import { getStorageLocation } from '../../libs/asyncStorage/locationStorage';
 import { stopLocationTask } from '../../tasks/backgroundLocationTask';
 
 type RouteParamsProps = {
@@ -35,10 +36,10 @@ export function Arrival() {
   const { goBack } = useNavigation();
   const { id } = route.params as RouteParamsProps;
 
-  // const historic = useObject(Historic, new BSON.UUID(id));
-  // const realm = useRealm();
+  const historic = useObject(Historic, new BSON.UUID(id));
+  const realm = useRealm();
 
-  // const title = historic?.status === 'departure' ? 'Chegada' : 'Detalhes';
+  const title = historic?.status === 'departure' ? 'Chegada' : 'Detalhes';
 
   function handleRemoveVehicleUsage() {
     Alert.alert(
@@ -52,44 +53,53 @@ export function Arrival() {
   }
 
   function removeVehicleUsage() {
-    // Realm.write(() => {
-    //   realm.delete(historic);
-    // });
+    Realm.write(() => {
+      realm.delete(historic);
+    });
 
     goBack();
   }
 
   async function handleArrivalRegister() {
-    // try {
-    //   if (!historic) {
-    //     return Alert.alert('Error', 'Não foi possível obter os dados para registrar a chegada do veículo.');
-    //   }
+    try {
+      if (!historic) {
+        return Alert.alert('Error', 'Não foi possível obter os dados para registrar a chegada do veículo.');
+      }
 
-    //   await stopLocationTask();
+      await stopLocationTask();
 
-    //   realm.write(() => {
-    //     historic.status = 'arrival',
-    //       historic.updated_at = new Date();
-    //   }
-    //   );
+      realm.write(() => {
+        historic.status = 'arrival',
+          historic.updated_at = new Date();
+      }
+      );
 
-    //   Alert.alert('Chegada', 'Chegada registrada com sucesso!');
-    //   goBack();
+      Alert.alert('Chegada', 'Chegada registrada com sucesso!');
+      goBack();
 
-    // } catch (error) {
-    //   console.log(error);
-    //   Alert.alert('Error', 'Não foi possível registrar a chegada do veículo.');
-    // }
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Error', 'Não foi possível registrar a chegada do veículo.');
+    }
   }
 
-  // useEffect(() => {
-  //   getLastAsyncTimestamp()
-  //     .then(lastSync => setDataNotSynced(historic!.updated_at.getTime() > lastSync));
-  // }, []);
+  async function getLocationsInfo() {
+    const lastSync = await getLastAsyncTimestamp();
+    const updatedAt = historic!.updated_at.getTime();
+    setDataNotSynced(updatedAt > lastSync);
+
+    const locationsStorage = await getStorageLocation();
+
+    console.log("[STORAGE]: ", locationsStorage);
+  }
+
+  useEffect(() => {
+    getLocationsInfo();
+  }, [historic]);
 
   return (
     <Container>
-      <Header title={/* title ? title : */ 'Chegada'} />
+      <Header title={title ? title : 'Chegada'} />
       <Content>
         <Label>
           Placa do veículo
@@ -111,7 +121,7 @@ export function Arrival() {
       </Content>
 
       {
-        // historic?.status === 'departure' &&
+        historic?.status === 'departure' &&
         <Footer>
           <ButtonIcon
             icon={X}
@@ -123,13 +133,13 @@ export function Arrival() {
           />
         </Footer>
       }
-      {/*
+
       {
         dataNotSynced &&
         <AsyncMessage>
           Sincronização da {historic?.status === 'departure' ? 'partida' : 'chegada'} pendente.
         </AsyncMessage>
-      } */}
+      }
     </Container>
   );
 }
