@@ -14,6 +14,7 @@ import { stopLocationTask } from '../../tasks/backgroundLocationTask';
 import { Button } from '../../components/Button';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { Header } from '../../components/Header';
+import { Locations } from '../../components/Locations';
 import { Map } from '../../components/Map';
 
 import {
@@ -117,13 +118,17 @@ export function Arrival() {
       {coordinates.length > 0 && <Map coordinates={coordinates} />}
 
       <Content>
+        <Locations
+          arrival={{ description: 'Chegada de teste', label: 'Chegada' }}
+          departure={{ description: 'Saída de teste', label: 'Saída' }}
+        />
+
         <Label>
           Placa do veículo
         </Label>
 
         <LicensePlate>
-          XXX0000
-          {/* { historic?.license_plate ?? 'XXX0000' } */}
+          {historic?.license_plate ?? 'XXX0000'}
         </LicensePlate>
 
         <Label>
@@ -131,8 +136,7 @@ export function Arrival() {
         </Label>
 
         <Description>
-          {/* { historic?.description } */}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a efficitur odio, et blandit turpis. In eget condimentum nisl, at ultrices ipsum. Etiam in aliquam ante. Phasellus nec rutrum magna. Pellentesque commodo gravida vehicula. Curabitur interdum hendrerit interdum. Pellentesque sagittis ultricies arcu at porttitor. Nam a tincidunt lectus. Fusce sollicitudin eget tortor et finibus.
+          {historic?.description ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a efficitur odio, et blandit turpis. In eget condimentum nisl, at ultrices ipsum. Etiam in aliquam ante. Phasellus nec rutrum magna. Pellentesque commodo gravida vehicula. Curabitur interdum hendrerit interdum. Pellentesque sagittis ultricies arcu at porttitor. Nam a tincidunt lectus. Fusce sollicitudin eget tortor et finibus.'}
         </Description>
       </Content>
 
