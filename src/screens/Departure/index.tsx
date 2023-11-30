@@ -19,7 +19,7 @@ import { LocationInfo } from '../../components/LocationInfo';
 import { Map } from '../../components/Map';
 import { TextAreaInput } from '../../components/TextAreaInput';
 
-import { Container, Content, Message } from './styles';
+import { Container, Content, Message, MessageContent } from './styles';
 import { Car } from 'phosphor-react-native';
 
 import { Historic } from '../../libs/realm/schemas/Historic';
@@ -28,6 +28,7 @@ import { useUser } from '@realm/react';
 
 import { getAddressLocation } from '../../utils/getAddressLocation';
 import { licensePlateValidate } from '../../utils/licensePlateValidate';
+import { openSettings } from '../../utils/openSettings';
 import { startLocationTask } from '../../tasks/backgroundLocationTask';
 
 export function Departure() {
@@ -136,10 +137,15 @@ export function Departure() {
     return (
       <Container>
         <Header title="Saída" />
-        <Message>
-          Você precisa permitir que o aplicativo tenha acesso a localização para utilizar essa funcionalidade.
-          Por favor, acesse as configurações do seu dispositivo para conceder essa permissão ao aplicativo.
-        </Message>
+
+        <MessageContent>
+          <Message>
+            Você precisa permitir que o aplicativo tenha acesso a localização para utilizar essa funcionalidade.
+            Por favor, acesse as configurações do seu dispositivo para conceder essa permissão ao aplicativo.
+          </Message>
+
+          <Button onPress={openSettings} title="Abrir Configurações" />
+        </MessageContent>
       </Container>
     )
   }
