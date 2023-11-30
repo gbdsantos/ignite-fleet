@@ -39,8 +39,8 @@ export function Departure() {
   const [currentCoords, setCurrentCoords] = useState<LocationObjectCoords | null>(null);
 
   const { goBack } = useNavigation();
-  // const realm = useRealm();
-  // const user = useUser();
+  const realm = useRealm();
+  const user = useUser();
 
   const [locationForegroundPermission, requestLocationForegroundPermission] = useForegroundPermissions();
 
@@ -76,13 +76,18 @@ export function Departure() {
 
       await startLocationTask();
 
-      // realm.write(() => {
-      //   Realm.create('Historic', Historic.generate({
-      //     user_id: user!.id,
-      //     license_plate: licensePlate.toUpperCase(),
-      //     description
-      //   }))
-      // });
+      realm.write(() => {
+        realm.create('Historic', Historic.generate({
+          user_id: user!.id,
+          license_plate: licensePlate.toUpperCase(),
+          description,
+          coords: [{
+            latitude: currentCoords.latitude,
+            longitude: currentCoords.longitude,
+            timestamp: new Date().getTime()
+          }]
+        }))
+      });
 
       Alert.alert('Saída', 'Saída do veículo registrada com sucesso!');
       goBack();
