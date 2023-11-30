@@ -16,6 +16,7 @@ export class Historic extends Realm.Object<Historic> {
   license_plate!: string;
   description!: string;
   coords!: CoordsSchemaProps[];
+  status!: string;
   created_at!: Date;
   updated_at!: Date;
 
