@@ -4,11 +4,11 @@ import { Container, Line } from './styles';
 import { Car, FlagCheckered } from 'phosphor-react-native';
 
 type Props = {
-  arrival: LocationInfoProps;
+  arrival?: LocationInfoProps | null;
   departure: LocationInfoProps;
 }
 
-export function Locations({ arrival, departure }: Props) {
+export function Locations({ arrival = null, departure }: Props) {
   return (
     <Container>
       <LocationInfo
@@ -17,13 +17,16 @@ export function Locations({ arrival, departure }: Props) {
         label={departure.label}
       />
 
-      <Line />
+      {arrival && <>
+        <Line />
 
-      <LocationInfo
-        description={arrival.description}
-        icon={FlagCheckered}
-        label={arrival.label}
-      />
+        <LocationInfo
+          description={arrival.description}
+          icon={FlagCheckered}
+          label={arrival.label}
+        />
+      </>
+      }
     </Container>
   );
 }
